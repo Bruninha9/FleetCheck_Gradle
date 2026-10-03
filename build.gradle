@@ -1,7 +1,11 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.cyclonedx.bom' version '3.4.1'
 }
+
+group = 'pt.upt.softwarequality'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -9,7 +13,7 @@ repositories {
 
 dependencies {
     // Biblioteca Jackson para leitura de JSON
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.22.2'
 
     // JUnit 5 para os testes unitários
     testImplementation platform('org.junit:junit-bom:5.10.0')
@@ -18,6 +22,19 @@ dependencies {
 
 application {
     mainClass = 'pt.upt.fleetcheck.App'
+}
+
+// Configuração do FAT JAR com dependências de runtime incluídas (Secção 8.3)
+jar {
+    manifest {
+        attributes 'Main-Class': 'pt.upt.fleetcheck.App'
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
 }
 
 tasks.named('test') {
