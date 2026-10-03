@@ -6,7 +6,7 @@ public class FleetService {
 
     public boolean needsService(Vehicle vehicle) {
         int kilometresSinceService = vehicle.mileageKm() - vehicle.lastServiceKm();
-        return kilometresSinceService > vehicle.serviceIntervalKm();
+        return kilometresSinceService >= vehicle.serviceIntervalKm();
     }
 
     public long countVehiclesNeedingService(List<Vehicle> vehicles) {

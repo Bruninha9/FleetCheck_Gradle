@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -25,7 +26,7 @@ public class App {
             System.out.println("Vehicles loaded: " + vehicles.size());
             System.out.println("Vehicles requiring service: "
                     + service.countVehiclesNeedingService(vehicles));
-            System.out.printf("Average mileage: %.0f km%n",
+            System.out.printf(Locale.US, "Average mileage: %.0f km%n",
                     service.averageMileage(vehicles));
         }
     }
