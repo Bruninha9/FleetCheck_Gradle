@@ -22,7 +22,7 @@ jobs:
           cache: gradle
 
       - name: Build
-        run: ./gradlew clean build
+        run: ./gradlew clean build --info
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v7
